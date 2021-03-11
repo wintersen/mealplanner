@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CookbookCard = () => {
     return(
@@ -8,6 +9,7 @@ const CookbookCard = () => {
                     <h3>Name of cookbook</h3>
                     <h4>Number of recipes</h4>
                     Owner
+                    <Link to='/cookbooks'>Cookbook</Link>
                 </div>
             </div>
             
