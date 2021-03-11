@@ -8,7 +8,7 @@ const RecipeCard = ({recipe}) => {
             <div className="p-3">
                 <h2>{recipe.name}</h2>
                 <h3>{recipe.tags}</h3>
-                <Link to={"/recipe/:" + recipe.id}>quick link to recipe</Link>
+                <Link to={"/recipe/" + recipe.id}>quick link to recipe</Link>
             </div>
         </div>
     )
