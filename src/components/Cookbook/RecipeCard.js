@@ -1,14 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const RecipeCard = ({recipe}) => {
+
+    let history = useHistory();
+
+    const handleClick = (id) => {
+        history.push('/recipe/' + id);
+    }
+
     return(
-        <div className="bg-white h-72 w-full rounded-lg flex flex-col shadow-md">
+        <div className="bg-white h-60 w-full rounded-lg flex flex-col shadow-md transition transform hover:scale-102 hover:shadow-lg cursor-pointer" onClick={() => handleClick(recipe.id)}>
             <img className="h-2/3 w-full object-cover rounded-lg rounded-b-none" src="https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4.jpg" alt="img"/>
             <div className="p-3">
                 <h2>{recipe.name}</h2>
                 <h3>{recipe.tags}</h3>
-                <Link to={"/recipe/" + recipe.id}>quick link to recipe</Link>
             </div>
         </div>
     )

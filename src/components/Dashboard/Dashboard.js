@@ -3,7 +3,6 @@ import SideNav from '../Navbars/SideNav';
 import CookbookCard from './CookbookCard';
 import EventCard from './EventCard';
 
-
 const Dashboard = () =>{
     return(
         <div className="flex-grow">
@@ -20,9 +19,9 @@ const Dashboard = () =>{
                             </button>
                         </div>
                         <div className="grid grid-cols-3 gap-4">
-                            <EventCard />
-                            <EventCard />
-                            <EventCard />
+                            <EventCard event={{id: '1'}}/>
+                            <EventCard event={{id: '2'}}/>
+                            <EventCard event={{id: '3'}}/>
                         </div>
                     </section>
                     <section className="max-h-1/2">

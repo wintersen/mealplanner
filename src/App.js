@@ -5,6 +5,7 @@ import Cookbook from './components/Cookbook/Cookbook';
 import Recipe from './components/Cookbook/Recipe';
 
 import Dashboard from './components/Dashboard/Dashboard';
+import Event from './components/Event/Event';
 import TopNav from './components/Navbars/TopNav';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/cookbooks" component={Cookbook}></Route>
           <Route path="/recipe/:id" component={Recipe}></Route>
+          <Route path="/event/:id" component={Event}></Route>
         </Switch>
       </div>
     </BrowserRouter>

@@ -9,6 +9,9 @@ module.exports = {
       '3/4': '75%',
       'full': '100%',
      },
+     scale: {
+      '102':'1.025'
+     },
     
     extend: {
       
