@@ -26,8 +26,9 @@ const Event = () => {
                         </div>
                     </div>
                     <div className="col-start-2 col-span-3">
-                        <div className="bg-white rounded-lg rounded-b-none">
-                            <img className="h-60 w-full object-cover rounded-lg rounded-b-none" src="https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4.jpg" alt="img" />
+                        <div className="bg-white rounded-lg rounded-b-none relative">
+                            <img className="z-0 h-60 w-full object-cover rounded-lg rounded-b-none" src="https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4.jpg" alt="img" />
+                            <div className="absolute w-full h-1/2 bottom-0 left-0 pl-5 pt-8 text-white text-7xl font-bold transparentBlack">event name</div>
                         </div>
                     </div>
                     <div className="col-start-1 col-span-1">
