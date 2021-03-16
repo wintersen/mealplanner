@@ -16,6 +16,7 @@ const AddRecipe = () => {
     const [name, setName] = useState(null);
     const [author, setAuthor] = useState(null);
     const [description, setDescription] = useState('');
+    const [portions, setPortions] = useState(0);
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
     const [notes, setNotes] = useState('');
@@ -31,7 +32,7 @@ const AddRecipe = () => {
             setValmodalOpen(true);
         }
         else{
-            let recipe = {name, author, image, description, ingredients, instructions, notes};
+            let recipe = {name, author, image, description, portions, ingredients, instructions, notes};
             dispatch(createRecipe(recipe));
         }
     }
@@ -150,6 +151,7 @@ const AddRecipe = () => {
                             <section className="flex flex-col mt-4">
                                 <input type="text" placeholder="Recipe Name" className="mb-5 rounded" onChange={e => setName(e.target.value)}/>
                                 <input type="text" placeholder="Author" className="mb-5 rounded" onChange={e => setAuthor(e.target.value)}/>
+                                <div className="flex flex-row items-center mb-5">Makes <input type="number" placeholder="2" className="rounded mx-2 w-20" onChange={e => setPortions(e.target.value)}/> portion(s)</div>
                                 <h3>TO DO:Tags</h3>
                             </section>
                             <section className="flex flex-col pt-4">

@@ -11,9 +11,14 @@ const initState = {
 const recipeReducer = (state = initState, action) => {
     switch(action.type){
         case 'CREATE_RECIPE':
-            console.log("created recipe", action.recipe);
+            console.log("CREATE_RECIPE: ", action.recipe);
+            return state;
+        case 'CREATE_RECIPE_ERROR':
+            console.log("CREATE_PROJECT_ERROR: ", action.err);
+            return state;
+        default:
+            return state;
     }
-    return state;
 }
 
 export default recipeReducer
