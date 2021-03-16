@@ -3,7 +3,10 @@ import SideNav from '../Navbars/SideNav';
 import CookbookCard from './CookbookCard';
 import EventCard from './EventCard';
 
-const Dashboard = () =>{
+//import { useSelector } from 'react-redux';
+
+const Dashboard = () => {
+
     return(
         <div className="flex-grow">
             <div className="h-full grid grid-cols-10">

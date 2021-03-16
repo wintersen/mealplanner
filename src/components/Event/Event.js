@@ -37,14 +37,9 @@ const Event = () => {
                     {/* This is the main body of the event page */}
                     <div className="col-span-3">
                         <div className="bg-white rounded-lg rounded-t-none p-5">
-                            <h1>Current Recipe List</h1>
-                            <div className="grid grid-cols-2 gap-4 my-5">
-                                <RecipeSnip recipe={{name: 'A', tags:'yum', id:'0'}} />
-                                <RecipeSnip recipe={{name: 'B', tags:'yum', id:'1'}} />
-                                <RecipeSnip recipe={{name: 'C', tags:'yum', id:'2'}} />
-                                <RecipeSnip recipe={{name: 'D', tags:'yum', id:'3'}} />
-                            </div>
+                            
                             <div className="flex flex-row justify-center space-x-32">
+                            <h1>Current Recipe List</h1>
                                 <button type="button" className="bg-gradient-to-r from-yellow-200 to-green-200 ml-5  rounded shadow">
                                     <div className="bg-yellow-200 h-full w-56 py-3 px-5 bg-opacity-0 hover:bg-opacity-100 rounded transition ease-in-out duration-250">Add New Recipe</div>
                                 </button>
@@ -52,6 +47,13 @@ const Event = () => {
                                     <div className="bg-yellow-200 h-full w-56 py-3 px-5 bg-opacity-0 hover:bg-opacity-100 rounded transition ease-in-out duration-250">Randomly Pick Recipes</div>
                                 </button>
                             </div>
+                            <div className="grid grid-cols-2 gap-4 my-5">
+                                <RecipeSnip recipe={{name: 'A', tags:'yum', id:'0'}} />
+                                <RecipeSnip recipe={{name: 'B', tags:'yum', id:'1'}} />
+                                <RecipeSnip recipe={{name: 'C', tags:'yum', id:'2'}} />
+                                <RecipeSnip recipe={{name: 'D', tags:'yum', id:'3'}} />
+                            </div>
+                           
                             
                         </div>
                     </div>

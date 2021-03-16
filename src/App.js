@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
+import AddRecipe from './components/Cookbook/AddRecipe';
 import Cookbook from './components/Cookbook/Cookbook';
 import Recipe from './components/Cookbook/Recipe';
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/cookbooks" component={Cookbook}></Route>
           <Route path="/recipe/:id" component={Recipe}></Route>
           <Route path="/event/:id" component={Event}></Route>
+          <Route path="/addRecipe" component={AddRecipe}></Route>
         </Switch>
       </div>
     </BrowserRouter>
