@@ -1,15 +1,19 @@
 import React from 'react';
 import RecipeCard from './RecipeCard';
-
+import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import BackButton from '../BackButton';
 
 const Cookbook = () => {
+    let slug = useParams();
+    console.log(slug);
+    
+    useFirestoreConnect(['Recipes']);
+    const recipes = useSelector((state) => state.firestore.ordered.Recipes);
 
-    const recipes = useSelector(state => state.recipes.recipes);
-    console.log(recipes);
-
-    const recipeList = recipes.length ? (recipes.map(recipe => {
+    const recipeList = recipes && recipes.length ? (recipes.map(recipe => {
         return (
             <RecipeCard recipe={recipe} key={recipe.id}/>
         )
@@ -17,10 +21,11 @@ const Cookbook = () => {
 
     return(
         <div className="bg-gray-100 h-full">
+            <BackButton></BackButton>
             <h1>Title of cookbook</h1>
             <h2>Author</h2>
             <h3>Number of recipes total</h3>
-            <Link to="/addRecipe"><button type="button" className="bg-gradient-to-r from-yellow-200 to-green-200 ml-5 rounded shadow">
+            <Link to={"/addRecipe/" + slug.id}><button type="button" className="bg-gradient-to-r from-yellow-200 to-green-200 ml-5 rounded shadow">
                 <div className="bg-yellow-200 h-full w-full py-1 px-2 bg-opacity-0 hover:bg-opacity-100 rounded transition ease-in-out duration-250">Add Recipe</div>
             </button></Link>
             <div className="grid grid-cols-4">

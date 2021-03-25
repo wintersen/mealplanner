@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
 import SideNav from '../Navbars/SideNav';
 import CookbookCard from './CookbookCard';
 import EventCard from './EventCard';
+import NewCookbookModal from './NewCookbookModal';
 
-//import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
+    useFirestoreConnect(['Cookbooks']);
+    const cookbooks = useSelector((state) => state.firestore.ordered.Cookbooks);
+
+    const [cookbookModalOpen, setCookbookModalOpen] = useState(false);
+
+    const cookbookCards = cookbooks && cookbooks.length ? (cookbooks.map(cb => {
+        return ( <CookbookCard cookbook={cb}/> )
+    })) : ( <div> No cookbooks found. </div> )
+
     return(
         <div className="flex-grow">
+            <NewCookbookModal isOpen={cookbookModalOpen} setModalOpen={setCookbookModalOpen}></NewCookbookModal>
             <div className="h-full grid grid-cols-10">
                 <div className="col-span-1">
                     <SideNav />
@@ -31,13 +43,11 @@ const Dashboard = () => {
                         <div className="p-3">
                             <span>Cookbooks</span>
                             <button type="button" className="bg-gradient-to-r from-yellow-200 to-green-200 ml-5  rounded shadow">
-                                <div className="bg-yellow-200 h-full w-full py-1 px-2 bg-opacity-0 hover:bg-opacity-100 rounded transition ease-in-out duration-250">Add New Cookbook</div>
+                                <div className="bg-yellow-200 h-full w-full py-1 px-2 bg-opacity-0 hover:bg-opacity-100 rounded transition ease-in-out duration-250" onClick={() => setCookbookModalOpen(true)}>Add New Cookbook</div>
                             </button>
                         </div>
                         <div className="grid grid-cols-3 gap-4">
-                            <CookbookCard />
-                            <CookbookCard />
-                            <CookbookCard />
+                            { cookbookCards }
                         </div>
                     </section>
                     

@@ -18,10 +18,10 @@ const App = () => {
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/login" component={SignIn}></Route>
           <Route path="/dashboard" component={Dashboard}></Route>
-          <Route path="/cookbooks" component={Cookbook}></Route>
+          <Route path="/cookbook/:id" component={Cookbook}></Route>
           <Route path="/recipe/:id" component={Recipe}></Route>
           <Route path="/event/:id" component={Event}></Route>
-          <Route path="/addRecipe" component={AddRecipe}></Route>
+          <Route path="/addRecipe/:cookbookid" component={AddRecipe}></Route>
         </Switch>
       </div>
     </BrowserRouter>

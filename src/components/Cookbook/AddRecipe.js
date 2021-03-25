@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { createRecipe } from '../../store/actions/recipeActions';
 
 const AddRecipe = () => {
 
     let history = useHistory();
+
+    let slug = useParams();
     const dispatch = useDispatch();
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -32,7 +35,7 @@ const AddRecipe = () => {
             setValmodalOpen(true);
         }
         else{
-            let recipe = {name, author, image, description, portions, ingredients, instructions, notes};
+            let recipe = {name, author, image, description, portions, ingredients, instructions, notes, belongsTo:[slug.cookbookid]};
             dispatch(createRecipe(recipe));
         }
     }
