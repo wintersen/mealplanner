@@ -15,7 +15,7 @@ const Dashboard = () => {
     const [cookbookModalOpen, setCookbookModalOpen] = useState(false);
 
     const cookbookCards = cookbooks && cookbooks.length ? (cookbooks.map(cb => {
-        return ( <CookbookCard cookbook={cb}/> )
+        return ( <CookbookCard cookbook={cb} key={cb.id}/> )
     })) : ( <div> No cookbooks found. </div> )
 
     return(

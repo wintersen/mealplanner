@@ -16,6 +16,13 @@ const recipeReducer = (state = initState, action) => {
         case 'CREATE_RECIPE_ERROR':
             console.log("CREATE_RECIPE_ERROR: ", action.err);
             return state;
+        case 'EDIT_RECIPE':
+            console.log("EDIT_RECIPE: ", action.recipe);
+            
+            return state;
+        case 'EDIT_RECIPE_ERROR':
+            console.log("EDIT_RECIPE_ERROR: ", action.err);
+            return state;
         default:
             return state;
     }

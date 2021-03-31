@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/recipe/:id" component={Recipe}></Route>
           <Route path="/event/:id" component={Event}></Route>
           <Route path="/addRecipe/:cookbookid" component={AddRecipe}></Route>
+          <Route path="/editRecipe/:id" component={AddRecipe}></Route>
         </Switch>
       </div>
     </BrowserRouter>

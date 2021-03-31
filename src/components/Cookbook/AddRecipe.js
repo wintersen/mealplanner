@@ -1,38 +1,63 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { createRecipe } from '../../store/actions/recipeActions';
+import { createRecipe, editRecipe } from '../../store/actions/recipeActions';
 
 const AddRecipe = () => {
 
     let history = useHistory();
-
     let slug = useParams();
+
     const dispatch = useDispatch();
 
     const [modalOpen, setModalOpen] = useState(false);
     const [valmodalOpen, setValmodalOpen] = useState(false);
     const [tempImage, setTempImage] = useState(''); //For changing image on button press
 
-    const [image, setImage] = useState("https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4.jpg");
-    const [name, setName] = useState(null);
-    const [author, setAuthor] = useState(null);
-    const [description, setDescription] = useState('');
-    const [portions, setPortions] = useState(0);
-    const [ingredients, setIngredients] = useState([]);
-    const [instructions, setInstructions] = useState([]);
-    const [notes, setNotes] = useState('');
+    const recipes = useSelector((state) => state.firestore.ordered.Recipes);
+
+    let editedRecipe = null;
+    let blankRecipe = {
+        image: "https://www.cookingclassy.com/wp-content/uploads/2021/01/butter-chicken-4.jpg",
+        name: '',
+        author: '',
+        description: '',
+        portions: 0,
+        ingredients: [],
+        instructions: [],
+        notes: ''
+    };
     
+    if (slug.id && recipes)
+        editedRecipe = recipes.find(r => r.id === slug.id);
+
+    // If editing a recipe, propogate state with that recipe's info  
+    if (editedRecipe) 
+        blankRecipe = editedRecipe;
+
+    // Prepare state to hold recipe 
+    const [image, setImage] = useState(blankRecipe.image);
+    const [name, setName] = useState(blankRecipe.name);
+    const [author, setAuthor] = useState(blankRecipe.author);
+    const [description, setDescription] = useState(blankRecipe.description);
+    const [portions, setPortions] = useState(blankRecipe.portions);
+    const [ingredients, setIngredients] = useState(blankRecipe.ingredients);
+    const [instructions, setInstructions] = useState(blankRecipe.instructions);
+    const [notes, setNotes] = useState(blankRecipe.notes);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(name === null || author === null || ingredients.length === 0 || instructions.length === 0){
+        if(name === '' || author === '' || ingredients.length === 0 || instructions.length === 0){
             setValmodalOpen(true);                
         }
         else if(ingredients[0] === "" || instructions[0] === ""){
             setValmodalOpen(true);
+        }
+        else if(editRecipe){
+            let recipe = {...editedRecipe, name, author, image, description, portions, ingredients, instructions, notes};
+            dispatch(editRecipe(recipe));
         }
         else{
             let recipe = {name, author, image, description, portions, ingredients, instructions, notes, belongsTo:[slug.cookbookid]};
@@ -152,14 +177,14 @@ const AddRecipe = () => {
                     <form onSubmit={e => handleSubmit(e)}>
                         <div className="grid grid-cols-1 gap-4 divide-y divide-yellow-500">
                             <section className="flex flex-col mt-4">
-                                <input type="text" placeholder="Recipe Name" className="mb-5 rounded" onChange={e => setName(e.target.value)}/>
-                                <input type="text" placeholder="Author" className="mb-5 rounded" onChange={e => setAuthor(e.target.value)}/>
-                                <div className="flex flex-row items-center mb-5">Makes <input type="number" placeholder="2" className="rounded mx-2 w-20" onChange={e => setPortions(e.target.value)}/> portion(s)</div>
+                                <input type="text" placeholder="Recipe Name" value={name} className="mb-5 rounded" onChange={e => setName(e.target.value)}/>
+                                <input type="text" placeholder="Author" value={author} className="mb-5 rounded" onChange={e => setAuthor(e.target.value)}/>
+                                <div className="flex flex-row items-center mb-5">Makes <input type="number" value={portions} placeholder="0" className="rounded mx-2 w-20" onChange={e => setPortions(e.target.value)}/> portion(s)</div>
                                 <h3>TO DO:Tags</h3>
                             </section>
                             <section className="flex flex-col pt-4">
                                 <h2>Description</h2>
-                                <textarea type="textarea" rows="3" className="mb-5 rounded w-full" onChange={e => setDescription(e.target.value)}></textarea>
+                                <textarea type="textarea" rows="3" value={description} className="mb-5 rounded w-full" onChange={e => setDescription(e.target.value)}></textarea>
                             </section>
                             <section className="flex flex-col pt-4">
                                 <h2>Ingredients</h2>
@@ -183,7 +208,7 @@ const AddRecipe = () => {
                             </section>
                             <section className="pt-4">
                                 <h2>Notes</h2>
-                                <textarea type="textarea" rows="3" className="mb-5 rounded w-full" onChange={e => setNotes(e.target.value)}></textarea>
+                                <textarea type="textarea" rows="3" value={notes} className="mb-5 rounded w-full" onChange={e => setNotes(e.target.value)}></textarea>
                             </section>
                         </div>
                         <div className="flex justify-center">
