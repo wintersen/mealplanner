@@ -28,7 +28,9 @@ const Dashboard = () => {
                     <SideNav />
                 </div>
                 <div className="col-span-10 md:col-span-9 bg-gray-100 overflow auto p-5">
-                    <section className="mb-10 max-h-1/2">
+                    
+                    {/* HIDDEN AT THE MOMENT 
+                    section className="mb-10 max-h-1/2">
                         <div className="p-3">
                             <span>Scheduled Events</span>
                             <button type="button" className="bg-gradient-to-r from-yellow-200 to-green-200 ml-5  rounded shadow">
@@ -40,7 +42,7 @@ const Dashboard = () => {
                             <EventCard event={{id: '2'}}/>
                             <EventCard event={{id: '3'}}/>
                         </div>
-                    </section>
+                    </section> */}
                     <section className="max-h-1/2">
                         <div className="p-3">
                             <span>Cookbooks</span>
