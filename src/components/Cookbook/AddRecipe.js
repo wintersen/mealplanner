@@ -29,11 +29,12 @@ const AddRecipe = () => {
         notes: ''
     };
     
-    if (slug.id && recipes)
+    // If the slug is empty, then we're adding a new recipe
+    if (Object.keys(slug).length !== 0 && recipes)
         editedRecipe = recipes.find(r => r.id === slug.id);
 
     // If editing a recipe, propogate state with that recipe's info  
-    if (editedRecipe) 
+    if (editedRecipe !== null) 
         blankRecipe = editedRecipe;
 
     // Prepare state to hold recipe 
@@ -55,12 +56,17 @@ const AddRecipe = () => {
         else if(ingredients[0] === "" || instructions[0] === ""){
             setValmodalOpen(true);
         }
-        else if(editRecipe){
+        else if(editedRecipe !== null){
             let recipe = {...editedRecipe, name, author, image, description, portions, ingredients, instructions, notes};
             dispatch(editRecipe(recipe));
         }
         else{
-            let recipe = {name, author, image, description, portions, ingredients, instructions, notes, belongsTo:[slug.cookbookid]};
+            // Current usage involves not filing recipes under a cookbook--build out system to give everyone a personal cookbook to start with by default
+            let recipe = {};
+            if(Object.keys(slug).length > 0)
+                recipe = {name, author, image, description, portions, ingredients, instructions, notes, belongsTo:[slug.cookbookid]};
+            else
+                recipe = {name, author, image, description, portions, ingredients, instructions, notes, belongsTo:['']};
             dispatch(createRecipe(recipe));
         }
     }
